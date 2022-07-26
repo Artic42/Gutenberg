@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "createDatabase",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/createDatabase.py",
+            "args": ["gutenbergTest.db", "dbElements", "REPLACE"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

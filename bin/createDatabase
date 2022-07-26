@@ -1,0 +1,72 @@
+#!/usr/bin/python3
+import sqlite3
+import sys
+import os
+
+def createDatabase (pathDB, pathElements):
+    if os.path.isfile (path):
+        return -1
+
+    db = sqlite3.connect (path)
+    os.mkdir (pathElements)
+    dbCursor = db.cursor
+
+    dbCursor.execute ("""CREATE TABLE system(
+        parameter text,
+        value text
+        )""")
+
+    dbCursor.execute (f""" INSERT INTO system (parameter, value)
+                        VALUE (elementsPath, {pathElements})""")
+
+    dbCursor.execute ("""CREATE TABLE templates(
+        name text,
+        description text,
+        texFile text)
+    """)
+
+    dbCursor.execute ("""CREATE TABLE colorPalletes(
+        name text,
+        description text,
+        backgroundColor text,
+        letterColor text,
+        texFile text)
+    """)
+
+    dbCursor.execute ("""CREATE TABLE generators(
+        name text,
+        description text,
+        generatorCommand text)
+    """)
+
+    dbCursor.execute ("""CREATE TABLE pendingJobs(
+        jobNumber int,
+        author text,
+        jiraStructure int, 
+        title text,
+        epic text,
+        issue text,
+        template text,
+        colorPallete text,
+        generator text,
+        texFile text,
+        elementsFile text)
+    """)
+
+    dbCursor.execute ("""CREATE TABLE finishedJobs(
+        jobNumber int,
+        author text,
+        jiraStructure int, 
+        title text,
+        epic text,
+        issue text,
+        template text,
+        colorPallete text,
+        generator text,
+        texFile text,
+        elementsFile text)
+    """)
+
+
+if __name__ == "__MAIN__":
+    createDatabase(sys.argv[1])
