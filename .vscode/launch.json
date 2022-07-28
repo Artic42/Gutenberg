@@ -1,11 +1,29 @@
 {
     "configurations": [
         {
+            "name": "insertTemplate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertTemplate.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gutenbergTest.db",
+                "FirstTemplate",
+                "This is the first Template",
+                "test.tex"
+            ],
+            "justMyCode": true
+        },
+        {
             "name": "createDatabase",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/createDatabase.py",
-            "args": ["gutenbergTest.db", "dbElements", "REPLACE"],
+            "args": [
+                "gutenbergTest.db",
+                "dbElements",
+                "REPLACE"
+            ],
             "console": "integratedTerminal",
             "justMyCode": true
         }

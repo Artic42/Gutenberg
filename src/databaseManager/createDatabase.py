@@ -15,6 +15,7 @@ def createDatabase (pathDB, pathElements):
     fileManagement.createDir (pathElements)
     
     createSystemTable (pathElements)
+    createDirStructureInElements (pathElements)
     createTemplatesTable ()
     createColorPalletesTable ()
     createPresetsTable ()
@@ -31,6 +32,12 @@ def createSystemTable (pathElements):
 
     Database.executeCommand (f"""INSERT INTO system (parameter, value) 
                         VALUES ('elementsPath', '{pathElements}');""")
+    
+
+def createDirStructureInElements (pathElements):
+    fileManagement.createDir(pathElements+"/templates")
+    fileManagement.createDir(pathElements+"/colorPalletes")
+    fileManagement.createDir(pathElements+"/jobs")
 
 def createTemplatesTable ():
     
