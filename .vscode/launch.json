@@ -15,6 +15,18 @@
             "justMyCode": true
         },
         {
+            "name": "deleteTemplate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/deleteTemplate.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gutenbergTest.db",
+                "FirstTemplate"
+            ],
+            "justMyCode": true
+        },
+        {
             "name": "createDatabase",
             "type": "python",
             "request": "launch",

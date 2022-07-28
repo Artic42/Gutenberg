@@ -3,12 +3,15 @@ import sqliteEngine
 import fileManagement
 
 def insertTemplate (dbPath, name, description, texFilePath):
+    if sqliteEngine.checkDatabaseExist(dbPath)==False:
+        return -1
+    
     global Database
     Database = sqliteEngine.sqliteConnection(dbPath)
 
     #LOG Error template name already exist on system
     if checkNameExist(name) == True:
-        return -1
+        return -2
 
     texFilePathIntoElements = copyTexFileIntoDatabase (name, texFilePath)
 
