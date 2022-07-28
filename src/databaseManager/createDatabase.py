@@ -1,4 +1,4 @@
-import sqlite3
+import sqliteConnection
 import sys
 import os
 import fileManagement
@@ -7,44 +7,42 @@ def deleteDatabase(pathDB):
     os.remove(pathDB)
 
 def createDatabase (pathDB, pathElements):
-    if os.path.isfile (pathDB):
+    if sqliteConnection.checkDatabaseExist(pathDB) == False:
         return -1
 
-    db = sqlite3.connect (pathDB)
+    global Database
+    Database = sqliteConnection.sqliteConnection (pathDB)
     fileManagement.createDir (pathElements)
     
-    createSystemTable (db, pathElements)
-    createTemplatesTable (db)
-    createColorPalletesTable (db)
-    createPresetsTable (db)
-    createGeneratorTable (db)
-    createJobsTables (db)
+    createSystemTable (pathElements)
+    createTemplatesTable ()
+    createColorPalletesTable ()
+    createPresetsTable ()
+    createGeneratorTable ()
+    createJobsTables ()
 
-    db.commit()
-    db.close()
+    Database.commitClose()
 
-def createSystemTable (database, pathElements):
-    dbCursor = database.cursor()
-
-    dbCursor.execute("""CREATE TABLE system(
+def createSystemTable (pathElements):
+    Database.executeCommand ("""CREATE TABLE system(
         parameter text,
         value text
         )""")
 
-    dbCursor.execute(f"""INSERT INTO system (parameter, value) 
+    Database.executeCommand (f"""INSERT INTO system (parameter, value) 
                         VALUES ('elementsPath', '{pathElements}');""")
 
-def createTemplatesTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE templates(
+def createTemplatesTable ():
+    
+    Database.executeCommand  ("""CREATE TABLE templates(
         name text,
         description text,
         texFile text)
     """)
 
-def createColorPalletesTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE colorPalletes(
+def createColorPalletesTable ():
+    
+    Database.executeCommand  ("""CREATE TABLE colorPalletes(
         name text,
         description text,
         backgroundColor text,
@@ -52,9 +50,9 @@ def createColorPalletesTable (database):
         texFile text)
     """)
 
-def createPresetsTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE presets(
+def createPresetsTable ():
+    
+    Database.executeCommand  ("""CREATE TABLE presets(
         name text,
         description text,
         template text,
@@ -62,17 +60,17 @@ def createPresetsTable (database):
         generator text
         )""")
 
-def createGeneratorTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE generators(
+def createGeneratorTable ():
+    
+    Database.executeCommand  ("""CREATE TABLE generators(
         name text,
         description text,
         generatorCommand text)
     """)
 
-def createJobsTables (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE pendingJobs(
+def createJobsTables ():
+    
+    Database.executeCommand  ("""CREATE TABLE pendingJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
@@ -86,7 +84,7 @@ def createJobsTables (database):
         elementsFile text)
     """)
 
-    dbCursor.execute ("""CREATE TABLE finishedJobs(
+    Database.executeCommand  ("""CREATE TABLE finishedJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
