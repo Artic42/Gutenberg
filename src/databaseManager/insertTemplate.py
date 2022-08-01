@@ -28,10 +28,6 @@ def copyTexFileIntoDatabase (name, texFilePath):
     fileManagement.copyFile(texFilePath,texFileDestination)
     return texFileDestination
 
-def checkNameExist (name):
-    result= Database.entryExistsOnTable("templates", f"name='{name}'")
-    return result
-
 if __name__ == "__main__":
     exitCode = insertTemplate (sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
     sys.exit(exitCode)
