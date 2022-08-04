@@ -1,17 +1,14 @@
-import sqliteConnection
 import sys
 import os
 import fileManagement
+import auxFunctions as aux
 
 def deleteDatabase(pathDB):
     os.remove(pathDB)
 
 def createDatabase (pathDB, pathElements):
-    if sqliteConnection.checkDatabaseExist(pathDB) == False:
-        return -1
-
-    global Database
-    Database = sqliteConnection.sqliteConnection (pathDB)
+    aux.checkDatabaseExist (pathDB)
+    aux.createDatabaseConnection (pathDB)
     fileManagement.createDir (pathElements)
     
     createSystemTable (pathElements)
@@ -22,15 +19,15 @@ def createDatabase (pathDB, pathElements):
     createGeneratorTable ()
     createJobsTables ()
 
-    Database.commitClose()
+    aux.Database.commitClose()
 
 def createSystemTable (pathElements):
-    Database.executeCommand ("""CREATE TABLE system(
+    aux.Database.executeCommand ("""CREATE TABLE system(
         parameter text,
         value text
         )""")
 
-    Database.executeCommand (f"""INSERT INTO system (parameter, value) 
+    aux.Database.executeCommand (f"""INSERT INTO system (parameter, value) 
                         VALUES ('elementsPath', '{pathElements}');""")
     
 
@@ -41,7 +38,7 @@ def createDirStructureInElements (pathElements):
 
 def createTemplatesTable ():
     
-    Database.executeCommand  ("""CREATE TABLE templates(
+    aux.Database.executeCommand  ("""CREATE TABLE templates(
         name text,
         description text,
         texFile text)
@@ -49,7 +46,7 @@ def createTemplatesTable ():
 
 def createColorPalletesTable ():
     
-    Database.executeCommand  ("""CREATE TABLE colorPalletes(
+    aux.Database.executeCommand  ("""CREATE TABLE colorPalletes(
         name text,
         description text,
         backgroundColor text,
@@ -59,7 +56,7 @@ def createColorPalletesTable ():
 
 def createPresetsTable ():
     
-    Database.executeCommand  ("""CREATE TABLE presets(
+    aux.Database.executeCommand  ("""CREATE TABLE presets(
         name text,
         description text,
         template text,
@@ -69,7 +66,7 @@ def createPresetsTable ():
 
 def createGeneratorTable ():
     
-    Database.executeCommand  ("""CREATE TABLE generators(
+    aux.Database.executeCommand  ("""CREATE TABLE generators(
         name text,
         description text,
         generatorCommand text)
@@ -77,7 +74,7 @@ def createGeneratorTable ():
 
 def createJobsTables ():
     
-    Database.executeCommand  ("""CREATE TABLE pendingJobs(
+    aux.Database.executeCommand  ("""CREATE TABLE pendingJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
@@ -91,7 +88,7 @@ def createJobsTables ():
         elementsFile text)
     """)
 
-    Database.executeCommand  ("""CREATE TABLE finishedJobs(
+    aux.Database.executeCommand  ("""CREATE TABLE finishedJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
