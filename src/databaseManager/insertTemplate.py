@@ -1,33 +1,16 @@
 import sys
-import sqliteEngine
-import fileManagement
+import auxFunctions as aux
 
 def insertTemplate (dbPath, name, description, texFilePath):
-    if sqliteEngine.checkDatabaseExist(dbPath)==False:
-        return -1
-    
-    global Database
-    Database = sqliteEngine.sqliteConnection(dbPath)
-
-    #LOG Error template name already exist on system
-    if checkNameExist(name) == True:
-        return -2
-
-    texFilePathIntoElements = copyTexFileIntoDatabase (name, texFilePath)
-
-    Database.executeCommand(f"""INSERT INTO templates (name, description, texFile)
+    aux.checkDatabaseExist(dbPath)
+    aux.createDatabaseConnection (dbPath)
+    aux.checkEntryNotPresent("Templates", name)
+    texFilePathIntoElements = aux.copyTexFileIntoDatabase (name, texFilePath)
+    aux.Database.executeCommand(f"""INSERT INTO templates (name, description, texFile)
     VALUES ('{name}','{description}','{texFilePathIntoElements}');""")
+    aux.closeDatabaseConnection()
 
-    Database.commitClose()
-    del Database
-    return 0
-
-def copyTexFileIntoDatabase (name, texFilePath):
-    elementsPath = Database.readEntryFiltered("value", "system", "parameter='elementsPath'")[0][0]
-    texFileDestination = elementsPath + "/templates/" + name + ".tex"
-    fileManagement.copyFile(texFilePath,texFileDestination)
-    return texFileDestination
 
 if __name__ == "__main__":
-    exitCode = insertTemplate (sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-    sys.exit(exitCode)
+    insertTemplate (sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+
