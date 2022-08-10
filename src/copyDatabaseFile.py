@@ -1,3 +1,3 @@
 import fileManagement
 
-fileManagement.copyFile("gutenbergTest.db", "/mnt/c/databases/gutenbergTest.db")
+fileManagement.copyFile("testFiles/gutenbergTest.db", "/mnt/c/databases/gutenbergTest.db")

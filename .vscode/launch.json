@@ -1,28 +1,35 @@
 {
     "configurations": [
         {
+            "name": "deleteEntry",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/deleteEntry.py",
+            "args":[
+                "testFiles/deletion.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "insertColorPallete",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertColorPallete.py",
+            "args": [
+                "testFiles/colorPallete.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "insertTemplate",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/insertTemplate.py",
             "console": "integratedTerminal",
             "args": [
-                "gutenbergTest.db",
-                "FirstTemplate",
-                "This is the first Template",
-                "test.tex"
-            ],
-            "justMyCode": true
-        },
-        {
-            "name": "deleteTemplate",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/src/databaseManager/deleteTemplate.py",
-            "console": "integratedTerminal",
-            "args": [
-                "gutenbergTest.db",
-                "FirstTemplate"
+                "testFiles/template.json"
             ],
             "justMyCode": true
         },
@@ -32,9 +39,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/createDatabase.py",
             "args": [
-                "gutenbergTest.db",
-                "dbElements",
-                "REPLACE"
+                "testFiles/database.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

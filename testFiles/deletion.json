@@ -1,0 +1,6 @@
+{
+    "dbPath":"testFiles/gutenbergTest.db",
+    "delete":
+        {"name":"template1",
+        "table":"templates"}
+}
