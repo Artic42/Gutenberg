@@ -1,0 +1,9 @@
+{
+    "dbPath":"testFiles/gutenbergTest.db",
+    "color":
+        {"name":"black",
+        "description":"Some description",
+        "template":"template1",
+        "colorPallete":"color1",
+        "generator":"command1"}
+}

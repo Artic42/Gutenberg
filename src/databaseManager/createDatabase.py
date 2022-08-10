@@ -3,6 +3,7 @@ import json
 import os
 import fileManagement
 import thoth
+import systemTable
 import auxFunctions as aux
 
 def deleteDatabase():
@@ -21,7 +22,7 @@ def createDatabase (pathElements):
     createPresetsTable ()
     createGeneratorTable ()
     createJobsTables ()
-    thoth.addEntry(thoth.INFO, f"Database creted with default information in path {aux.dbPath}")
+    thoth.addEntry(thoth.INFO, f"Database created with default information in path {aux.dbPath}")
 
     aux.Database.commitClose()
 
@@ -30,10 +31,8 @@ def createSystemTable (pathElements):
         parameter text,
         value text
         )""")
-
-    aux.Database.executeCommand (f"""INSERT INTO system (parameter, value) 
-                        VALUES ('elementsPath', '{pathElements}');""")
-    
+    systemTable.insertItem("elementsPath", pathElements)
+    systemTable.insertItem("jobInProgress", "FALSE")
 
 def createDirStructureInElements (pathElements):
     fileManagement.createDir(pathElements)
@@ -80,7 +79,8 @@ def createGeneratorTable ():
     aux.Database.executeCommand  ("""CREATE TABLE generators(
         name text,
         description text,
-        generatorCommand text)
+        generatorCommand text,
+        shellScript text)
     """)
 
 def createJobsTables ():
@@ -110,7 +110,8 @@ def createJobsTables ():
         colorPallete text,
         generator text,
         texFile text,
-        elementsFile text)
+        elementsFile text,
+        dateFinished text)
     """)
 
 def readDatabaseJSON (jsonPath):

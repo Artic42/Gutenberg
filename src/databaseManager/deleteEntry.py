@@ -8,7 +8,7 @@ def deleteEntry (table, name):
     aux.createDatabaseConnection()
     aux.checkEntryExists(table, name)
     if table == "templates":
-        aux.deleteTexFileFromSystem (table, name)
+        aux.deleteFileFromSystem (table, name)
     aux.Database.deleteEntryFromTable(table, f"name='{name}'")
     thoth.addEntry (thoth.INFO, f"Entry deleted from {table} with name {name}")
     aux.closeDatabaseConnection ()

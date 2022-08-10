@@ -3,14 +3,14 @@ import auxFunctions as aux
 import thoth
 import json
 
-def insertColorPallete(name, red, blue, green, opacity):
+def insertColorPallete(color):
     aux.checkDatabaseExist ()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("colors", name)
+    aux.checkEntryNotPresent("colors", color["name"])
     aux.Database.executeCommand (f"""INSERT INTO colors
         (name, red, blue, green, opacity) VALUES
-        ('{name}','{red}','{blue}','{green}','{opacity}');""")
-    thoth.addEntry (thoth.INFO, f"Color added with name {name} to table colors")
+        ('{color["name"]}','{color["red"]}','{color["blue"]}','{color["green"]}','{color["opacity"]}');""")
+    thoth.addEntry (thoth.INFO, f"Color added with name {color['name']} to table colors")
     aux.closeDatabaseConnection()
 
 
@@ -24,5 +24,5 @@ def readColorJSON (jsonPath):
 if __name__ == "__main__":
     log1 = thoth.log("insertColor", "/logs", thoth.INFO | thoth.ERROR, 30)
     element = readColorJSON (sys.argv[1])
-    insertColorPallete (element["name"], element["red"], element["blue"], element["green"], element["opacity"])
+    insertColorPallete (element)
     log1.closeLog()

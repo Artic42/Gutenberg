@@ -1,0 +1,8 @@
+{
+    "dbPath":"testFiles/gutenbergTest.db",
+    "generator":
+        {"name":"command1",
+        "description":"Just some description",
+        "generatoCommand":"xelatex",
+        "shellScript":"none"}
+}

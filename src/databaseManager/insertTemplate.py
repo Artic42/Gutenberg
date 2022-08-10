@@ -3,14 +3,14 @@ import json
 import thoth
 import auxFunctions as aux
 
-def insertTemplate (name, description, texFilePath):
+def insertTemplate (template):
     aux.checkDatabaseExist()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("templates", name)
-    texFilePathIntoElements = aux.copyTexFileIntoDatabase (name, texFilePath, "templates")
+    aux.checkEntryNotPresent("templates", template["name"])
+    texFilePathIntoElements = aux.copyFileIntoDatabase (template["name"], template["texFilePath"], "templates")
     aux.Database.executeCommand(f"""INSERT INTO templates (name, description, texFile)
-    VALUES ('{name}','{description}','{texFilePathIntoElements}');""")
-    thoth.addEntry (thoth.INFO, f"Template added with name {name}")
+    VALUES ('{template["name"]}','{template["description"]}','{texFilePathIntoElements}');""")
+    thoth.addEntry (thoth.INFO, f"Template added with name {template['name']}")
     aux.closeDatabaseConnection()
 
 def readTemplateJSON (jsonPath):
@@ -23,5 +23,5 @@ def readTemplateJSON (jsonPath):
 if __name__ == "__main__":
     thoth.log("insertTemplate", "/logs", thoth.INFO | thoth.ERROR, 30)
     element = readTemplateJSON (sys.argv[1])
-    insertTemplate (element["name"], element["description"], element["texFile"])
+    insertTemplate (element)
 
