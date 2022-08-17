@@ -1,0 +1,9 @@
+createDatabaseTest
+2022/08/13 20:46:20 - INFO - Execute the create database command with the database test json file
+2022/08/13 20:46:20 - INFO - Compare the created database with the empty reference database
+2022/08/13 20:46:20 - INFO - Both database are equal create database test PASSED
+2022/08/13 20:46:20 - INFO - The test have been SUCCESFULL
+2022/08/13 20:46:20 - INFO - 1 tests have been executed
+2022/08/13 20:46:20 - INFO - 1 tests have PASS
+2022/08/13 20:46:20 - INFO - 0 tests have FAILED
+2022/08/13 20:46:20 - INFO - 0 tests have SKIPPED

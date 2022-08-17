@@ -21,6 +21,6 @@ def readDeletionJSON (jsonPath):
     return data ["delete"]
 
 if __name__ == "__main__":
-    log1 = thoth.log ("deleteEntry", "/logs", thoth.INFO | thoth.ERROR, 30)
+    log1 = thoth.log ("deleteEntry", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     entry = readDeletionJSON (sys.argv[1])
     deleteEntry (entry["table"], entry["name"])

@@ -25,7 +25,7 @@ def readColorPalleteJSON (jsonPath):
     return data ["colorPallete"]
 
 if __name__ == "__main__":
-    log1 = thoth.log("insertColorPallete", "/logs", thoth.INFO | thoth.ERROR, 30)
+    log1 = thoth.log("insertColorPallete", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     element = readColorPalleteJSON (sys.argv[1])
     insertColorPallete (element)
     log1.closeLog()

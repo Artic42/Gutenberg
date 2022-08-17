@@ -1,7 +1,7 @@
 {
     "dbPath":"testFiles/gutenbergTest.db",
     "template":
-        {"name":"template1",
+        {"name":"template3",
         "description":"some description",
-        "texFile":"testFiles/test.tex"}
+        "texFile":"test/testFiles/test.tex"}
 }

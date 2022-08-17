@@ -1,0 +1,7 @@
+{
+    "dbPath":"testFiles/gutenbergTest.db",
+    "template":
+        {"name":"template2",
+        "description":"some description",
+        "texFile":"test/testFiles/test.tex"}
+}

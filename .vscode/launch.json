@@ -29,7 +29,7 @@
             "program": "${workspaceFolder}/src/databaseManager/insertTemplate.py",
             "console": "integratedTerminal",
             "args": [
-                "testFiles/template.json"
+                "test/databaseManager/jsonFiles/template1.json"
             ],
             "justMyCode": true
         },
@@ -39,7 +39,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/createDatabase.py",
             "args": [
-                "testFiles/database.json"
+                "test/databaseManager/jsonFiles/database.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

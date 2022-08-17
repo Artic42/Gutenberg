@@ -1,0 +1,7 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "template":
+        {"name":"template1",
+        "description":"some description",
+        "texFile":"test/testFiles/test.tex"}
+}

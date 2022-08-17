@@ -28,7 +28,7 @@ def readPresetJSON (jsonPath):
     return data ["preset"]
 
 if __name__ == "__main__":
-    log1 = thoth.log("insertPreset", "/logs", thoth.INFO | thoth.ERROR, 30)
+    log1 = thoth.log("insertPreset", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     element = readPresetJSON (sys.argv[1])
     insertPreset (element)
     log1.closeLog()

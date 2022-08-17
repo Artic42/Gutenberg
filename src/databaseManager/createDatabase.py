@@ -122,7 +122,7 @@ def readDatabaseJSON (jsonPath):
     return data
 
 if __name__ == "__main__":
-    log1 = thoth.log("createDatabase", "/logs", thoth.INFO | thoth.ERROR, 20)
+    log1 = thoth.log("createDatabase", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 20)
     data = readDatabaseJSON (sys.argv[1])
     if data["replace"]=="True" and aux.databaseExist():
         thoth.addEntry(thoth.INFO, "System detected database already exist and there is order to replace")

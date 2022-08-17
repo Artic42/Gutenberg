@@ -46,6 +46,6 @@ def readJobJSON (jsonPath):
     return data ["job"]
 
 if __name__ == "__main__":
-    thoth.log("insertJob", "/logs", thoth.INFO | thoth.ERROR, 30)
+    thoth.log("insertJob", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     element = readJobJSON (sys.argv[1])
     insertJob (element["name"], element["description"], element["texFile"])

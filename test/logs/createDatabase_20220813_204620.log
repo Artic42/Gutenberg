@@ -1,0 +1,5 @@
+createDatabase
+2022/08/13 20:46:20 - INFO - Json file test/databaseManager/jsonFiles/database.json read, and loaded as database file
+2022/08/13 20:46:20 - INFO - System detected database already exist and there is order to replace
+2022/08/13 20:46:20 - INFO - Database deleted in path /home/artic/Gutenberg/test/results/testDatabase.db
+2022/08/13 20:46:20 - INFO - Database created with default information in path /home/artic/Gutenberg/test/results/testDatabase.db

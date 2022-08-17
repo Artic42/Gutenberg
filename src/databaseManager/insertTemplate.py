@@ -7,7 +7,7 @@ def insertTemplate (template):
     aux.checkDatabaseExist()
     aux.createDatabaseConnection ()
     aux.checkEntryNotPresent("templates", template["name"])
-    texFilePathIntoElements = aux.copyFileIntoDatabase (template["name"], template["texFilePath"], "templates")
+    texFilePathIntoElements = aux.copyFileIntoDatabase (template["name"], template["texFile"], "templates", ".tex")
     aux.Database.executeCommand(f"""INSERT INTO templates (name, description, texFile)
     VALUES ('{template["name"]}','{template["description"]}','{texFilePathIntoElements}');""")
     thoth.addEntry (thoth.INFO, f"Template added with name {template['name']}")
@@ -21,7 +21,7 @@ def readTemplateJSON (jsonPath):
     return data ["template"]
 
 if __name__ == "__main__":
-    thoth.log("insertTemplate", "/logs", thoth.INFO | thoth.ERROR, 30)
+    thoth.log("insertTemplate", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     element = readTemplateJSON (sys.argv[1])
     insertTemplate (element)
 
