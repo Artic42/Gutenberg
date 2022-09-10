@@ -1,5 +1,5 @@
 {
-    "dbPath":"testFiles/gutenbergTest.db",
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
     "colorPallete": 
         {"name":"color1",
         "description":"some description",

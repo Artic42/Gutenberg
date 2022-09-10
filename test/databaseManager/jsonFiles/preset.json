@@ -1,6 +1,6 @@
 {
-    "dbPath":"testFiles/gutenbergTest.db",
-    "color":
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "preset":
         {"name":"black",
         "description":"Some description",
         "template":"template1",

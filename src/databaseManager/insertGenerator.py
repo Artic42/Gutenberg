@@ -6,9 +6,9 @@ import json
 def insertGenerator(generator):
     aux.checkDatabaseExist ()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("generators", generator["name"])
-    shellScriptPath = aux.copyFileIntoDatabase (generator["name"], generator["shellScript"], "generators")
-    aux.Database.executeCommand (f"""INSERT INTO colorPalletes
+    aux.checkNameEntryNotPresent("generators", generator["name"])
+    shellScriptPath = aux.copyFileIntoDatabase (generator["name"], generator["shellScript"], "generators", "sh")
+    aux.Database.executeCommand (f"""INSERT INTO generators
         (name,description, generatorCommand, shellScript) VALUES
         ('{generator["name"]}','{generator["description"]}','{generator["generatorCommand"]}','{shellScriptPath}');""")
     thoth.addEntry (thoth.INFO, f"Generator added with name {generator['name']}")

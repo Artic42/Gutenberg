@@ -6,7 +6,7 @@ import json
 def insertColorPallete(color):
     aux.checkDatabaseExist ()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("colors", color["name"])
+    aux.checkNameEntryNotPresent("colors", color["name"])
     aux.Database.executeCommand (f"""INSERT INTO colors
         (name, red, blue, green, opacity) VALUES
         ('{color["name"]}','{color["red"]}','{color["blue"]}','{color["green"]}','{color["opacity"]}');""")

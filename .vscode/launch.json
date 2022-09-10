@@ -1,12 +1,20 @@
 {
     "configurations": [
         {
+            "name": "testImport",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test/databaseManager/importDataTest.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "deleteEntry",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/deleteEntry.py",
-            "args":[
-                "testFiles/deletion.json"
+            "args": [
+                "test/databaseManager/jsonFiles/deletion.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
@@ -17,7 +25,18 @@
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/insertColorPallete.py",
             "args": [
-                "testFiles/colorPallete.json"
+                "test/databaseManager/jsonFiles/colorPallete.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "insertJob",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertJob.py",
+            "args": [
+                "test/databaseManager/jsonFiles/job.json"
             ],
             "console": "integratedTerminal",
             "justMyCode": true

@@ -1,8 +1,8 @@
 {
-    "dbPath":"testFiles/gutenbergTest.db",
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
     "generator":
         {"name":"command1",
         "description":"Just some description",
-        "generatoCommand":"xelatex",
+        "generatorCommand":"xelatex",
         "shellScript":"none"}
 }

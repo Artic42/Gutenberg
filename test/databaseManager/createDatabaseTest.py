@@ -1,6 +1,7 @@
 import os
+import time
 import thoth
-import mergeLogDir
+import thothUtils
 import fileManagement
 import testEngine
 
@@ -21,10 +22,12 @@ def test ():
 
 
 if __name__ == "__main__":
-    fileManagement.cleanDir("test/logs")
+    if fileManagement.checkExistsDir ("test/logs"):
+        fileManagement.cleanDir("test/logs")
     log = thoth.log ("createDatabaseTest", "test/logs", thoth.INFO | thoth.ERROR, 30)
     testEngine.startTest ()
     test()
+    time.sleep (1)
     testEngine.env.printResults ()
     testEngine.env.logResults ()
-    mergeLogDir.main("test/logs", "test/logs/log")
+    thothUtils.mergeLog("test/logs", "mergedTestLog", "test/logs/mergedTestLog.log")

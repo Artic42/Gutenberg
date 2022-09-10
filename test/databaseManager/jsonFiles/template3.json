@@ -1,5 +1,5 @@
 {
-    "dbPath":"testFiles/gutenbergTest.db",
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
     "template":
         {"name":"template3",
         "description":"some description",

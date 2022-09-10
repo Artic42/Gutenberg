@@ -6,7 +6,7 @@ import auxFunctions as aux
 def insertTemplate (template):
     aux.checkDatabaseExist()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("templates", template["name"])
+    aux.checkNameEntryNotPresent("templates", template["name"])
     texFilePathIntoElements = aux.copyFileIntoDatabase (template["name"], template["texFile"], "templates", ".tex")
     aux.Database.executeCommand(f"""INSERT INTO templates (name, description, texFile)
     VALUES ('{template["name"]}','{template["description"]}','{texFilePathIntoElements}');""")
@@ -24,4 +24,5 @@ if __name__ == "__main__":
     thoth.log("insertTemplate", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 30)
     element = readTemplateJSON (sys.argv[1])
     insertTemplate (element)
+    sys.exit (0)
 

@@ -1,5 +1,5 @@
 {
-    "dbPath":"testFiles/gutenbergTest.db",
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
     "color":
         {"name":"black",
         "red":"0",

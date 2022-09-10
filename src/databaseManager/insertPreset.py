@@ -6,7 +6,7 @@ import json
 def insertPreset(preset):
     aux.checkDatabaseExist ()
     aux.createDatabaseConnection ()
-    aux.checkEntryNotPresent("Presets", preset["name"])
+    aux.checkNameEntryNotPresent("Presets", preset["name"])
     aux.checkEntryExists("templates", preset["template"])
     aux.checkEntryExists("colorPalletes", preset["colorPallete"])
     aux.checkEntryExists("generators", preset["generator"])
