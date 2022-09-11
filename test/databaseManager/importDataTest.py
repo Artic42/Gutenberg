@@ -112,6 +112,15 @@ def test ():
     else:
         testEngine.env.skipTest()
 
+    if testEngine.env.isPassed():
+        SM.command ("sqldiff test/results/testDatabase.db test/databaseManager/fullDatabase.db | tee test/results/diff")
+        # if fileManagement.filesSizeInLines("test/results/diff") == 2:
+            # testEngine.env.passTest()
+        # else:
+            # testEngine.env.failTest()
+    else:
+        testEngine.env.skipTest()
+
 if __name__ == "__main__":
     if fileManagement.checkExistsDir ("test/logs"):
         fileManagement.cleanDir("test/logs")

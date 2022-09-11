@@ -4,13 +4,14 @@ import thoth
 import thothUtils
 import fileManagement
 import testEngine
+import systemManagement as SM
 
 def test ():
     if testEngine.env.isPassed():
         thoth.addEntry (thoth.INFO, "Execute the create database command with the database test json file")
-        os.system ("python3 src/databaseManager/createDatabase.py test/databaseManager/jsonFiles/database.json")
+        SM.command ("python3 src/databaseManager/createDatabase.py test/databaseManager/jsonFiles/database.json")
         thoth.addEntry (thoth.INFO, "Compare the created database with the empty reference database")
-        os.system ("sqldiff test/results/testDatabase.db test/databaseManager/emptyDatabase.db | tee test/results/diff")
+        SM.command ("sqldiff test/results/testDatabase.db test/databaseManager/emptyDatabase.db | tee test/results/diff")
         if fileManagement.checkFileEmpty("test/results/diff"):
             thoth.addEntry (thoth.INFO, "Both database are equal create database test PASSED")
             testEngine.env.passTest()
