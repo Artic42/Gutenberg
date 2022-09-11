@@ -42,6 +42,17 @@
             "justMyCode": true
         },
         {
+            "name": "executeJob",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/executeJob.py",
+            "args": [
+                "test/databaseManager/jsonFiles/execution.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
             "name": "insertTemplate",
             "type": "python",
             "request": "launch",

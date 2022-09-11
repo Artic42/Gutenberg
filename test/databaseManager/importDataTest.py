@@ -7,6 +7,8 @@ import testEngine
 
 def test ():
     if testEngine.env.isPassed():
+        if fileManagement.checkExistsDir ("test/results") == False:
+            fileManagement.createDir ("test/results")
         fileManagement.copyFile("test/databaseManager/emptyDatabase.db", "test/results/testDatabase.db")
         result1 = SM.command ("python3 src/databaseManager/insertTemplate.py test/databaseManager/jsonFiles/template1.json")
         result2 = SM.command ("python3 src/databaseManager/insertTemplate.py test/databaseManager/jsonFiles/template2.json")
@@ -93,6 +95,17 @@ def test ():
     if testEngine.env.isPassed():
         result = SM.command ("python3 src/databaseManager/insertJob.py test/databaseManager/jsonFiles/job.json")
         if result.ExitCode == 0:
+            testEngine.env.passTest()
+        else:
+            testEngine.env.failTest()
+    else:
+        testEngine.env.skipTest()
+
+    if testEngine.env.isPassed():
+        result = SM.command ("python3 src/executeJob.py test/databaseManager/jsonFiles/execution.json")
+        SM.command ("python3 src/databaseManager/insertJob.py test/databaseManager/jsonFiles/job.json")
+        result2 = SM.command ("python3 src/executeJob.py test/databaseManager/jsonFiles/execution.json")
+        if result.ExitCode == 0 and result2.ExitCode == 0:
             testEngine.env.passTest()
         else:
             testEngine.env.failTest()

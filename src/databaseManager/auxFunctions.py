@@ -56,17 +56,24 @@ def readSystemTable (parameter):
     value = Database.readEntryFiltered("value", "system", f"parameter='{parameter}'")[0][0]
     return value
 
+def getFirstPendingJob ():
+    value = Database.readEntry ("jobNumber", "pendingJobs")[0][0]
+    return value
+
 def move2Finshed (jobNumber):
-    Database.executeCommand (f"""INSERT INTO finishedJob
-                                    SELECT * FROM pendingJob
+    Database.executeCommand (f"""INSERT INTO finishedJobs
+                                    SELECT * FROM pendingJobs
                                     WHERE jobNumber='{jobNumber}'""")
+    Database.deleteEntryFromTable ("pendingJobs", f"jobNumber='{jobNumber}'")
 
 def setFinishedDate (jobNumber):
-    date = date_time.datetime()
+    date = date_time.createDate()
     date.now()
     dateString = date.createString()
-    Database.executeCommand (f"""UPDATE finishedJob
+    Database.executeCommand (f"""UPDATE finishedJobs
                             SET dateFinished='{dateString}'
                             WHERE jobNumber='{jobNumber}'""")
+
+
 
 

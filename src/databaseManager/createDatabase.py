@@ -96,7 +96,8 @@ def createJobsTables ():
         colorPallete text,
         generator text,
         texFile text,
-        elementsFile text)
+        elementsFile text,
+        dateFinished text)
     """)
 
     aux.Database.executeCommand  ("""CREATE TABLE finishedJobs(

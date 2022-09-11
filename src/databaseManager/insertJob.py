@@ -21,7 +21,8 @@ def insertJob (job):
                 colorPallete,
                 generator,
                 texFile,
-                elementsFile)
+                elementsFile,
+                dateFinished)
     VALUES (
                 '{jobNumber}',
                 '{job["author"]}',
@@ -33,7 +34,8 @@ def insertJob (job):
                 '{job["colorPallete"]}',
                 '{job["generator"]}',
                 '{texFilePathIntoElements}',
-                '{elementsFilePathIntoElements}');""")
+                '{elementsFilePathIntoElements}',
+                NULL);""")
     thoth.addEntry (thoth.INFO, f"Job added with number {jobNumber} and ")
     aux.closeDatabaseConnection()
 
