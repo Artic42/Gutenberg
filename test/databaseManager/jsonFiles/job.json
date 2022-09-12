@@ -1,0 +1,15 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "job":
+        {"author":"testAuthor",
+        "jiraStructure": "False",
+        "title": "testTitle",
+        "epic": "GUT-42",
+        "issue": "GUT-78",
+        "template": "template1",
+        "colorPallete": "color1",
+        "generator": "command1",
+        "autoPublish": "True",
+        "texFile":"test/testFiles/test.tex",
+        "elementsFiles":"test/testFiles/test.tar"}
+}

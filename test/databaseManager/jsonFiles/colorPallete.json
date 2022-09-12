@@ -1,0 +1,8 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "colorPallete": 
+        {"name":"color1",
+        "description":"some description",
+        "backgroundColor":"white",
+        "letterColor":"black"}
+}

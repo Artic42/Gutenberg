@@ -1,0 +1,6 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "delete":
+        {"name":"template1",
+        "table":"templates"}
+}

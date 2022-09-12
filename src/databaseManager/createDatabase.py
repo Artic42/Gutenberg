@@ -1,60 +1,72 @@
-import sqlite3
 import sys
+import json
 import os
 import fileManagement
+import thoth
+import systemTable
+import auxFunctions as aux
 
-def deleteDatabase(pathDB):
-    os.remove(pathDB)
+def deleteDatabase():
+    os.remove(aux.dbPath)
+    thoth.addEntry(thoth.INFO, f"Database deleted in path {aux.dbPath}")
 
-def createDatabase (pathDB, pathElements):
-    if os.path.isfile (pathDB):
-        return -1
-
-    db = sqlite3.connect (pathDB)
+def createDatabase (pathElements):
+    aux.checkDatabaseNotPresent ()
+    aux.createDatabaseConnection ()
     fileManagement.createDir (pathElements)
     
-    createSystemTable (db, pathElements)
-    createTemplatesTable (db)
-    createColorPalletesTable (db)
-    createPresetsTable (db)
-    createGeneratorTable (db)
-    createJobsTables (db)
+    createSystemTable (pathElements)
+    createDirStructureInElements (pathElements)
+    createTemplatesTable ()
+    createColorPalletesTable ()
+    createPresetsTable ()
+    createGeneratorTable ()
+    createJobsTables ()
+    thoth.addEntry(thoth.INFO, f"Database created with default information in path {aux.dbPath}")
 
-    db.commit()
-    db.close()
+    aux.Database.commitClose()
 
-def createSystemTable (database, pathElements):
-    dbCursor = database.cursor()
-
-    dbCursor.execute("""CREATE TABLE system(
+def createSystemTable (pathElements):
+    aux.Database.executeCommand ("""CREATE TABLE system(
         parameter text,
         value text
         )""")
+    systemTable.insertItem("elementsPath", pathElements)
+    systemTable.insertItem("jobInProgress", "FALSE")
 
-    dbCursor.execute(f"""INSERT INTO system (parameter, value) 
-                        VALUES ('elementsPath', '{pathElements}');""")
+def createDirStructureInElements (pathElements):
+    fileManagement.createDir(pathElements)
+    fileManagement.createDir(pathElements+"/templates")
+    fileManagement.createDir(pathElements+"/jobs")
 
-def createTemplatesTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE templates(
+def createTemplatesTable ():
+    
+    aux.Database.executeCommand  ("""CREATE TABLE templates(
         name text,
         description text,
         texFile text)
     """)
 
-def createColorPalletesTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE colorPalletes(
+def createColorPalletesTable ():
+    
+    aux.Database.executeCommand  ("""CREATE TABLE colorPalletes(
         name text,
         description text,
         backgroundColor text,
-        letterColor text,
-        texFile text)
+        letterColor text)
     """)
 
-def createPresetsTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE presets(
+    aux.Database.executeCommand ("""CREATE TABLE colors (
+        name text,
+        red int,
+        green int,
+        blue int,
+        opacity int)
+    """)
+
+def createPresetsTable ():
+    
+    aux.Database.executeCommand  ("""CREATE TABLE presets(
         name text,
         description text,
         template text,
@@ -62,17 +74,18 @@ def createPresetsTable (database):
         generator text
         )""")
 
-def createGeneratorTable (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE generators(
+def createGeneratorTable ():
+    
+    aux.Database.executeCommand  ("""CREATE TABLE generators(
         name text,
         description text,
-        generatorCommand text)
+        generatorCommand text,
+        shellScript text)
     """)
 
-def createJobsTables (database):
-    dbCursor = database.cursor()
-    dbCursor.execute ("""CREATE TABLE pendingJobs(
+def createJobsTables ():
+    
+    aux.Database.executeCommand  ("""CREATE TABLE pendingJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
@@ -83,10 +96,11 @@ def createJobsTables (database):
         colorPallete text,
         generator text,
         texFile text,
-        elementsFile text)
+        elementsFile text,
+        dateFinished text)
     """)
 
-    dbCursor.execute ("""CREATE TABLE finishedJobs(
+    aux.Database.executeCommand  ("""CREATE TABLE finishedJobs(
         jobNumber int,
         author text,
         jiraStructure int, 
@@ -97,10 +111,22 @@ def createJobsTables (database):
         colorPallete text,
         generator text,
         texFile text,
-        elementsFile text)
+        elementsFile text,
+        dateFinished text)
     """)
+
+def readDatabaseJSON (jsonPath):
+    thoth.addEntry(thoth.INFO, f"Json file {jsonPath} read, and loaded as database file")
+    file = open(jsonPath)
+    data = json.load(file)
+    aux.defineDatabasePath(data["dbPath"])
+    return data
 
 if __name__ == "__main__":
-    if len(sys.argv)>=3 and os.path.isfile(sys.argv[1]):
-        deleteDatabase(sys.argv[1])
-    createDatabase(sys.argv[1], sys.argv[2])
+    log1 = thoth.log("createDatabase", "/home/artic/Gutenberg/test/logs", thoth.INFO | thoth.ERROR, 20)
+    data = readDatabaseJSON (sys.argv[1])
+    if data["replace"]=="True" and aux.databaseExist():
+        thoth.addEntry(thoth.INFO, "System detected database already exist and there is order to replace")
+        deleteDatabase()
+    createDatabase(data["elementsPath"])
+    log1.closeLog()

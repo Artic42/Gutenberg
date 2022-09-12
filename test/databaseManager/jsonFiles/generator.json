@@ -1,0 +1,8 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "generator":
+        {"name":"command1",
+        "description":"Just some description",
+        "generatorCommand":"xelatex",
+        "shellScript":"none"}
+}

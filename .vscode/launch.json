@@ -1,11 +1,76 @@
 {
     "configurations": [
         {
+            "name": "testImport",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/test/databaseManager/importDataTest.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "deleteEntry",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/deleteEntry.py",
+            "args": [
+                "test/databaseManager/jsonFiles/deletion.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "insertColorPallete",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertColorPallete.py",
+            "args": [
+                "test/databaseManager/jsonFiles/colorPallete.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "insertJob",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertJob.py",
+            "args": [
+                "test/databaseManager/jsonFiles/job.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "executeJob",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/executeJob.py",
+            "args": [
+                "test/databaseManager/jsonFiles/execution.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "insertTemplate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/databaseManager/insertTemplate.py",
+            "console": "integratedTerminal",
+            "args": [
+                "test/databaseManager/jsonFiles/template1.json"
+            ],
+            "justMyCode": true
+        },
+        {
             "name": "createDatabase",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/databaseManager/createDatabase.py",
-            "args": ["gutenbergTest.db", "dbElements", "REPLACE"],
+            "args": [
+                "test/databaseManager/jsonFiles/database.json"
+            ],
             "console": "integratedTerminal",
             "justMyCode": true
         }

@@ -1,0 +1,5 @@
+{
+    "dbPath":"/home/artic/Gutenberg/test/results/testDatabase.db",
+    "replace":"True",
+    "elementsPath":"/home/artic/Gutenberg/test/results/dbElements"
+}
