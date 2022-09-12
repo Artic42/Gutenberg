@@ -1,5 +1,5 @@
 include makefiles/databaseManager.make
-
+include makefiles/execute.make
 
 
 all: databaseManager execution
@@ -12,10 +12,3 @@ clean:
 	@echo Repo cleaned
 
 install:
-
-execution: bin/executeJob.app
-	@mkdir -p bin
-	@cat pythonInterpreter src/executeJob.py > bin/executeJob.app
-	@echo executeJob done
-
-bin/executeJob.app: src/executeJob.py pythonInterpreter
