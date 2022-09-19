@@ -1,0 +1,42 @@
+body {
+    background-color:#040404;
+}
+header{
+    background-color: #040404;
+    text-align: center;
+    font-size: x-large;
+    color: #FB9846
+}
+nav {
+    text-align: center;
+    color: #040404;
+    font-size: large;
+}
+.form {
+    background-color: #606060;
+    color: #040404;
+    padding: 30px;
+    margin: 0px;
+    border: 0px;
+}
+.Button{
+    display: inline-block;
+    padding: 20px;
+    margin: 0px;
+    border: 0px;
+    width: 170px;
+    min-height: 20px;
+}
+#mainMenu{
+    background-color:  #606060;
+}
+#secMenu{
+    background-color: #808080;
+}
+.Button.active{
+    color: #FB9846
+}
+a{
+    color: inherit; 
+    text-decoration: inherit;
+}
